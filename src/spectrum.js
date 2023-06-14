@@ -456,7 +456,7 @@
                 }
 
                 if (isValid()) {
-                    updateOriginalInput(true);
+                    updateOriginalInput(true, true);
                     hide();
                 }
             });
@@ -972,7 +972,7 @@
             }
         }
 
-        function updateOriginalInput(fireCallback) {
+        function updateOriginalInput(fireCallback, force) {
             var color = get(),
                 displayColor = '',
                 hasChanged = !tinycolor.equals(color, colorOnShow);
@@ -983,7 +983,7 @@
                 addColorToSelectionPalette(color);
             }
 
-            if (fireCallback && hasChanged) {
+            if (fireCallback && (hasChanged || force)) {
                 callbacks.change(color);
                 // we trigger the change event or input, but the input change event is also binded
                 // to some spectrum processing, that we do no need
